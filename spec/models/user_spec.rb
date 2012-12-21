@@ -30,7 +30,7 @@ end
 
  it {should be_valid}
 
- describe "when name is not present" do
+describe "when name is not present" do
  	before {@user.name = " "}
  	it {should_not be_valid}
 end
@@ -94,7 +94,7 @@ describe "when password is not present" do
  	it {should be_invalid}
  end
 
- describe "retturn value of authenticate method" do
+ describe "return value of authenticate method" do
  	before {@user.save}
  	let(:found_user){User.find_by_email(@user.email)}
 
@@ -107,6 +107,16 @@ describe "when password is not present" do
 
  		it {should_not == user_for_invalid_password}
  		specify {user_for_invalid_password.should be_false}
+ 	end
+
+ 	describe "email address with mixed case" do
+ 		let(:mixed_case_email){"Foo@ExAmPLe.CoM"}
+
+ 		it "should be all saved as lower-case" do
+ 			@user.email = mixed_case_email
+ 			@user.save
+ 			@user.reload.email.should == mixed_case_email.downcase
+ 		end
  	end
  end
 end

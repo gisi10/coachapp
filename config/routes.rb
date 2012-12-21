@@ -1,5 +1,5 @@
 Coachapp::Application.routes.draw do
-  get "users/new"
+  resources :users
 
   root to: 'static_pages#home'
 
@@ -10,6 +10,8 @@ Coachapp::Application.routes.draw do
   match '/contact', to: 'static_pages#contact'
 
   match '/signup', to: 'users#new'
+
+
 
  
 
